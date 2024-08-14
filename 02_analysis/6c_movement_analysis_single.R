@@ -32,12 +32,6 @@ updatePaths <- function() {
   PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY <<- paste0(PATH_TO_GT, APPENDIX_OUTPUT_INTERMEDIATE)
   
   setwd(PATH_TO_DIRECTORY_INPUT)
-  unlink(paste0(PATH_TO_OUTPUT_DIRECTORY, "*"))
-  dir.create(PATH_TO_OUTPUT_DIRECTORY, showWarnings = FALSE)
-}
-
-AUC <- function(x, y){
-  return(sum(diff(x)*rollmean(y,2)))
 }
 
 getIntermediateResults <- function() {
@@ -51,7 +45,7 @@ getIntermediateResults <- function() {
     json <- list(fromJSON(file = file))[[1]]
     
     large_frame <- data.frame(matrix(ncol = 8, nrow = 0))
-   
+    
     
     for(sequence in json) { #todo: change this parameter for newer versions
       for(item in sequence$itemDeltas) {
@@ -108,9 +102,6 @@ getIntermediateResults <- function() {
   return()
 }
 
-
-euclidean <- function(a, b, c) sqrt(sum((a^2 + b^2 + c^2)))
-
 writeIntermediateOutput <- function(intermediate_results, fileName) {
   setwd(PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY)
   outputFormat <- toJSON(intermediate_results)
@@ -129,9 +120,6 @@ startIntermediate <- function() {
   }  
 }
 
-plot_frame <<- data.frame(matrix(ncol = 8, nrow = 0))
-max_values <<- data.frame(matrix(ncol = 3, nrow = 0))
-
 
 startIntermediate()
 
@@ -142,28 +130,6 @@ colnames(plot_frame) <- c("time", "diff_translation_x","diff_translation_y", "di
                           "diff_rotation_x","diff_rotation_y","diff_rotation_z", "itemLabel", "sequence")
 colnames(max_values) <- c("sequence", "item","max_trans_x", "max_trans_y",
                           "max_trans_z","max_rot_x","max_rot_y", "max_rot_z")
-
-View(max_values)
-itemed = split(plot_frame, plot_frame$itemLabel)
-
-max_values <- shortendLegendTitles(max_values)
-
-
-plot <- ggplot(data=max_values, aes(x=as.numeric(sequence), y=as.numeric(max_rot_z), group=item)) +
-  geom_line(aes(color=item)) +
-  labs(y = "Rotation z", x="Sequence") +
-  scale_color_discrete(breaks=c('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'))+
-  theme(text = element_text(size = 32))+
-  ylim(0, 50)
-plot
-
-ggsave("max_rotation_z.png", plot, width = 10, height = 6)
-
-
-shortendLegendTitles <- function(max_values) {
-  max_values$item <- str_replace(max_values$item, "Class_3_Instance_15_ULD_0_", "")
-  return(max_values)
-}
 
 
 calculateAUC <- function(delta) {

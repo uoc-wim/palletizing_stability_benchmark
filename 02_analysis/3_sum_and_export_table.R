@@ -1,5 +1,6 @@
 library(tidyverse)
 library(xtable)
+library(rjson)
 
 
 DATASET_1 <- "Data_1/"
@@ -57,21 +58,21 @@ makeOutput <- function(results) {
   
   results$Approach[results$Approach == 'PacquayCriterion'] <- 'Paquay'
   
-  results$Approach[results$Approach == 'PartialBaseSupportCriterion50'] <- 'PBS$_{(\\alpha = 0.50)}$'
-  results$Approach[results$Approach == 'PartialBaseSupportCriterion60'] <- 'PBS$_{(\\alpha = 0.60)}$'
-  results$Approach[results$Approach == 'PartialBaseSupportCriterion70'] <- 'PBS$_{(\\alpha = 0.70)}$'
-  results$Approach[results$Approach == 'PartialBaseSupportCriterion80'] <- 'PBS$_{(\\alpha = 0.80)}$'
-  results$Approach[results$Approach == 'PartialBaseSupportCriterion90'] <- 'PBS$_{(\\alpha = 0.90)}$'
+  results$Approach[results$Approach == 'PartialBaseSupportCriterion50'] <- 'PBS$_{(0.50)}$'
+  results$Approach[results$Approach == 'PartialBaseSupportCriterion60'] <- 'PBS$_{(0.60)}$'
+  results$Approach[results$Approach == 'PartialBaseSupportCriterion70'] <- 'PBS$_{(0.70)}$'
+  results$Approach[results$Approach == 'PartialBaseSupportCriterion80'] <- 'PBS$_{(0.80)}$'
+  results$Approach[results$Approach == 'PartialBaseSupportCriterion90'] <- 'PBS$_{(0.90)}$'
 
-  results$Approach[results$Approach == 'ScienceOfStaticKrebsCriterion'] <- 'SME_K'
+  results$Approach[results$Approach == 'ScienceOfStaticKrebsCriterion'] <- 'SME$_K$'
   results$Approach[results$Approach == 'ScienceOfStaticRamosCriterion'] <- 'SME'
 
   
-  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta1'] <-     'PS$_{(\\epsilon_T = 1.0)}$'
-  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta2'] <-     'PS$_{(\\epsilon_T = 2.0)}$'
-  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta3'] <-     'PS$_{(\\epsilon_T = 3.0)}$'
-  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta4'] <-     'PS$_{(\\epsilon_T = 4.0)}$'
-  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta5'] <-     'PS$_{(\\epsilon_T = 5.0)}$'
+  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta1'] <-     'PS$_{(1.0)}$'
+  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta2'] <-     'PS$_{(2.0)}$'
+  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta3'] <-     'PS$_{(3.0)}$'
+  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta4'] <-     'PS$_{(4.0)}$'
+  results$Approach[results$Approach == 'StaticLoadStabilityCriterionDelta5'] <-     'PS$_{(5.0)}$'
   
   #Evtl. S_1 instead of S1
   results$Scenario[results$Scenario == 'final_results_Ulds_scenario_1.csv'] <- 'S1'
@@ -83,34 +84,34 @@ makeOutput <- function(results) {
          SS_E = Equals_GT,
   )
 
-  output_df <- cbind(results[,12])
-  output_df <- cbind(output_df, results[,2])
-  output_df <- cbind(output_df, results[,3])
-  output_df <- cbind(output_df, results[,4])
-  output_df <- cbind(output_df, results[,5])
-  output_df <- cbind(output_df, round(results[,11], digits = 3))
+  output_df <- cbind(results[,12]) # Scenario
+  output_df <- cbind(output_df, results[,2]) # Approach
+  output_df <- cbind(output_df, results[,5]) # Accuracy
+  output_df <- cbind(output_df, results[,3]) # UE
+  output_df <- cbind(output_df, results[,4]) # OE
+  output_df <- cbind(output_df, round(results[,11], digits = 3)) # Runtime
   
-  colnames(output_df) <- c("Scenario", "Approach", "$j_{max} < \\theta$", "$j_{max} > \\theta$", "$j_{max} = \\theta$", "Runtime")
+  colnames(output_df) <- c("Scenario", "Approach", "Accuracy", "UE", "OE", "Runtime")
   
   output_df$Approach <- factor(output_df$Approach, levels = c("FBS", 
                                                               
                                                               "Paquay",
                                                               
-                                                              "PBS$_{(\\alpha = 0.50)}$",
-                                                              "PBS$_{(\\alpha = 0.60)}$",
-                                                              "PBS$_{(\\alpha = 0.70)}$",
-                                                              "PBS$_{(\\alpha = 0.80)}$",
-                                                              "PBS$_{(\\alpha = 0.90)}$",
+                                                              "PBS$_{(0.50)}$",
+                                                              "PBS$_{(0.60)}$",
+                                                              "PBS$_{(0.70)}$",
+                                                              "PBS$_{(0.80)}$",
+                                                              "PBS$_{(0.90)}$",
                                                               
-                                                              "SME_K",
+                                                              "SME$_K$",
                                                               "SME",
 
                                                               
-                                                              "PS$_{(\\epsilon_T = 1.0)}$",
-                                                              "PS$_{(\\epsilon_T = 2.0)}$", 
-                                                              "PS$_{(\\epsilon_T = 3.0)}$", 
-                                                              "PS$_{(\\epsilon_T = 4.0)}$", 
-                                                              "PS$_{(\\epsilon_T = 5.0)}$"))
+                                                              "PS$_{(1.0)}$",
+                                                              "PS$_{(2.0)}$", 
+                                                              "PS$_{(3.0)}$", 
+                                                              "PS$_{(4.0)}$", 
+                                                              "PS$_{(5.0)}$"))
   
   return(output_df)
   
@@ -118,7 +119,7 @@ makeOutput <- function(results) {
 
 makeOutputError <- function(output) {
   error_df <- NULL
-  error_df <- output[, c(2, 3, 4, 5)]
+  error_df <- output[, c(2, 3, 5, 6)]
 
   colnames(error_df) <- c("Scenario", "Approach", "Smaller", "Greater")
   error_df$Smaller = error_df$Smaller
@@ -129,17 +130,34 @@ makeOutputError <- function(output) {
 
 renameApproaches <- function(approach) {
   levels(approach)[levels(approach)=="Paquay"] <- "PBS_3"
-  levels(approach)[levels(approach)=="PBS$_{(\\alpha = 0.50)}$"] <- "PBS_0.5"
-  levels(approach)[levels(approach)=="PBS$_{(\\alpha = 0.70)}$"] <- "PBS_0.7"
-  levels(approach)[levels(approach)=="PBS$_{(\\alpha = 0.90)}$"] <- "PBS_0.9"
-  levels(approach)[levels(approach)=="PS$_{(\\epsilon_T = 5.0)}$"] <- "PS_5"
-  return(approach)
+  levels(approach)[levels(approach)=="SME$_K$"] <- "SME_K"
+  levels(approach)[levels(approach)=="PBS$_{(0.80)}$"] <- "PBS_0.8"
+  
+  levels(approach)[levels(approach)=="PBS$_{(0.50)}$"] <- "PBS_0.5"
+  levels(approach)[levels(approach)=="PBS$_{(0.70)}$"] <- "PBS_0.7"
+  levels(approach)[levels(approach)=="PBS$_{(0.90)}$"] <- "PBS_0.9"
+  levels(approach)[levels(approach)=="PS$_{(1.0)}$"] <- "PS_1"
+  levels(approach)[levels(approach)=="PS$_{(5.0)}$"] <- "PS_5"
+  
+  
+  # Set the desired order of the approaches
+  desired_order <- c("FBS", "PBS_0.8", "PBS_0.5", "SME", "PS_1", "PS_5")
+  
+  # Convert the Approach column to a factor with the specified order
+  result <- factor(approach, levels = desired_order)
+  
+  return(result)
 }
 
 #### Plotting
 makePlotAccuracy2 <- function(output, num_approaches) {
-  vector_selected = c(1, 9, 6, 7, 8, 14)
-  data <- output[c(vector_selected, vector_selected + num_approaches, vector_selected+2*num_approaches), c(2,3,6)]
+  approaches_selected = c(1, 3, 6, 7, 10, 14)
+  
+  # refers to dataset, approach, accuracy
+  columns_selected <- c(2, 3, 4)
+
+  
+  data <- output[c(approaches_selected, approaches_selected + num_approaches, approaches_selected+2*num_approaches), columns_selected]
 
   data$Approach <- renameApproaches(data$Approach)
   colnames(data) <- c("Scenario", "Approach", "Accuracy")
@@ -162,15 +180,15 @@ makePlotAccuracy2 <- function(output, num_approaches) {
   }
 
 makePlotErrorsUnderestimations <- function(errors, num_approaches) {
-  vector_selected = c(1, 9, 6, 7, 8, 14)
-  data <- errors[c(vector_selected, vector_selected + num_approaches, vector_selected + 2 * num_approaches),]
+  approaches_selected = c(1, 6, 3, 7, 10, 14)
+  data <- errors[c(approaches_selected, approaches_selected + num_approaches, approaches_selected + 2 * num_approaches),]
   row.names(data) <- NULL
   data$Approach <- renameApproaches(data$Approach)
 
   plot <- ggplot(data=data, aes(x=Approach, y=Smaller, fill=Scenario, width = 0.4)) +
     geom_bar(stat="identity", position=position_dodge()) +
     scale_y_continuous(limits = c(0, 1)) +
-    labs(y = "Underestimations",)+
+    labs(y = "Underestimation",)+
     theme(legend.position = c(0.15, 0.87),
           axis.text=element_text(size=14),
           axis.title=element_text(size=14,face="bold"),
@@ -186,8 +204,8 @@ makePlotErrorsUnderestimations <- function(errors, num_approaches) {
 }
 
 makePlotErrorsOverestimations <- function(errors, num_approaches) {
-  vector_selected = c(1, 9, 6, 7, 8, 14)
-  data <- errors[c(vector_selected, vector_selected + num_approaches, vector_selected + 2*num_approaches),]
+  approaches_selected = c(1, 6, 3, 7, 10, 14)
+  data <- errors[c(approaches_selected, approaches_selected + num_approaches, approaches_selected + 2*num_approaches),]
   row.names(data) <- NULL
   
   data$Approach <- renameApproaches(data$Approach)
@@ -195,7 +213,7 @@ makePlotErrorsOverestimations <- function(errors, num_approaches) {
   plot <- ggplot(data=data, aes(x=Approach, y=Greater, fill=Scenario, width = 0.4)) +
     geom_bar(stat="identity", position=position_dodge()) +
     scale_y_continuous(limits = c(0, 1)) +
-    labs(y = "Overestimations",)+
+    labs(y = "Overestimation",)+
     theme(legend.position = c(0.15, 0.87),
           axis.text=element_text(size=14),
           axis.title=element_text(size=14,face="bold"),
@@ -229,20 +247,11 @@ writeResults <- function(table) {
   include.rownames = FALSE, #Don't print rownames
   caption.placement = "top", #"top", NULL,
   size="\\fontsize{9pt}{10pt}\\tiny",
-  hline.after = getOption("xtable.hline.after", c(-1,0,14,26, nrow(table))),
   )
   
 }
 
-obtainValues <- function() {
-  results_df <- getResults()
-  output <- makeOutput(results = results_df)
-  return(output)
-}
-
 startSingle <- function(output) {
-  #output <- obtainValues()
-
   writeResults(output)
   makePlotAccuracy2(output, 14)
   errors <- makeOutputError(output)
@@ -253,14 +262,13 @@ startSingle <- function(output) {
 
 
 startAll <- function() {
-  #output_df <- data.frame()
   for (dataset in DATASETS) {
     CURRENT_DATASET <<- dataset
     print(paste0("Evaluating ", CURRENT_DATASET))
     updatePaths()
-    #startSingle()
     
-    output <- obtainValues()
+    results_df <- getResults()
+    output <- makeOutput(results = results_df)
     
     Dataset = c(substr(CURRENT_DATASET, 6, 6))
     output <- cbind(Dataset, output)
