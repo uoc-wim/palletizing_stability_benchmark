@@ -1,0 +1,119 @@
+{
+  "assessmentCriteria": [
+
+    {
+      "criterionType": "FullBaseSupportCriterion",
+      "weight": 20
+    },
+    {
+        "criterionType": "PartialBaseSupportCriterion",
+        "weight": 1,
+        "alpha": 0.9
+    },
+    {
+        "criterionType": "PartialBaseSupportCriterion",
+        "weight": 1,
+        "alpha": 0.8
+    },
+    {
+        "criterionType": "PartialBaseSupportCriterion",
+        "weight": 1,
+        "alpha": 0.7
+    },
+    {
+        "criterionType": "PartialBaseSupportCriterion",
+        "weight": 1,
+        "alpha": 0.6
+    },
+    {
+        "criterionType": "PartialBaseSupportCriterion",
+        "weight": 1,
+        "alpha": 0.5
+    },
+    {
+      "criterionType": "ScienceOfStaticRamosCriterion",
+      "weight": 20
+    },
+    {
+      "criterionType": "ScienceOfStaticKrebsCriterion",
+      "weight": 20
+    },
+    {
+      "criterionType": "PacquayCriterion",
+      "weight": 20
+    },
+    {
+          "criterionType": "PhysicalSimulationCriterion",
+          "weight": 1,
+          "epsilonTranslation": 1,
+          "resolution": 60,
+          "time": 4,
+          "epsilonRotation": 100,
+          "restitution": 0.5,
+          "friction": 0.5,
+          "collisionMargin": 0.04,
+          "broadPhase": "dbvt",
+          "itemScalingFactor": 1,
+          "itemHeightOffset": 0
+          
+    },
+    {
+          "criterionType": "PhysicalSimulationCriterion",
+          "weight": 1,
+          "epsilonTranslation": 2,
+          "resolution": 60,
+          "time": 4,
+          "epsilonRotation": 100,
+          "restitution": 0.5,
+          "friction": 0.5,
+          "collisionMargin": 0.04,
+          "broadPhase": "dbvt",
+          "itemScalingFactor": 1,
+          "itemHeightOffset": 0
+    },
+    {
+          "criterionType": "PhysicalSimulationCriterion",
+          "weight": 1,
+          "epsilonTranslation": 3,
+          "resolution": 60,
+          "time": 4,
+          "epsilonRotation": 100,
+          "restitution": 0.5,
+          "friction": 0.5,
+          "collisionMargin": 0.04,
+          "broadPhase": "dbvt",
+          "itemScalingFactor": 1,
+          "itemHeightOffset": 0
+    },
+    {
+          "criterionType": "PhysicalSimulationCriterion",
+          "weight": 1,
+          "epsilonTranslation": 4,
+          "resolution": 60,
+          "time": 4,
+          "epsilonRotation": 100,
+          "restitution": 0.5,
+          "friction": 0.5,
+          "collisionMargin": 0.04,
+          "broadPhase": "dbvt",
+          "itemScalingFactor": 1,
+          "itemHeightOffset": 0
+    },
+    {
+          "criterionType": "PhysicalSimulationCriterion",
+          "weight": 1,
+          "epsilonTranslation": 5,
+          "resolution": 60,
+          "time": 4,
+          "epsilonRotation": 100,
+          "restitution": 0.5,
+          "friction": 0.5,
+          "collisionMargin": 0.04,
+          "broadPhase": "dbvt",
+          "itemScalingFactor": 1,
+          "itemHeightOffset": 0
+
+    }
+  ],
+  "label": null
+}

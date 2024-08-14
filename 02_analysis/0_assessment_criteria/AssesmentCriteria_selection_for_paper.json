@@ -1,0 +1,46 @@
+{
+  "assessmentCriteria": [
+    {
+      "criterionType": "FullBaseSupportCriterion"
+    },
+    {
+      "criterionType": "PartialBaseSupportCriterion90"
+    },
+    {
+      "criterionType": "PartialBaseSupportCriterion80"
+    },
+    {
+      "criterionType": "PartialBaseSupportCriterion70"
+    },
+    {
+      "criterionType": "PartialBaseSupportCriterion60"
+    },
+    {
+      "criterionType": "PartialBaseSupportCriterion50"
+    },
+    {
+      "criterionType": "ScienceOfStaticRamosCriterion"
+    },
+    {
+      "criterionType": "ScienceOfStaticKrebsCriterion"
+    },
+    {
+      "criterionType": "PacquayCriterion"
+    },
+    {
+      "criterionType": "StaticLoadStabilityCriterionDelta1"
+    },
+    {
+      "criterionType": "StaticLoadStabilityCriterionDelta2"
+    },
+    {
+      "criterionType": "StaticLoadStabilityCriterionDelta3"
+    },
+    {
+      "criterionType": "StaticLoadStabilityCriterionDelta4"
+    },
+    {
+      "criterionType": "StaticLoadStabilityCriterionDelta5"
+    }
+  ]
+}
