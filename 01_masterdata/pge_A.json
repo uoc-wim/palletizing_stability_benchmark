@@ -1,0 +1,95 @@
+{
+    "properties": {
+        "palletLabel": "pge_md11f_md",
+        "contourLabel": "A_contour_96",
+        "iataCode": "PGE",
+        "description": "Pallet",
+        "standardWeight": 571,
+        "maxWeight": 11340,
+        "certified": true,
+        "extensionWidth": 0,
+        "extensionHeight": 0,
+        "extensionMaxWeight": 0,
+        "bottomArea": [
+            {
+                "x": 0,
+                "y": 0
+            },
+            {
+                "x": 606,
+                "y": 0
+            },
+            {
+                "x": 606,
+                "y": 244
+            },
+            {
+                "x": 0,
+                "y": 244
+            }
+        ],
+        "loadableBottomArea": [
+            {
+                "x": 6,
+                "y": 6
+            },
+            {
+                "x": 599,
+                "y": 6
+            },
+            {
+                "x": 599,
+                "y": 237
+            },
+            {
+                "x": 6,
+                "y": 237
+            }
+        ],
+        "contourVertices": [
+            {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "x": 0,
+                "y": 244,
+                "z": 0
+            },
+            {
+                "x": 244,
+                "y": 244,
+                "z": 0
+            },
+            {
+                "x": 244,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "x": 0,
+                "y": 0,
+                "z": 606
+            },
+            {
+                "x": 0,
+                "y": 244,
+                "z": 606
+            },
+            {
+                "x": 244,
+                "y": 244,
+                "z": 606
+            },
+            {
+                "x": 244,
+                "y": 0,
+                "z": 606
+            }
+        ],
+        "uldType": "Pallet",
+		"generalPackingSides": ["FRONT", "LEFT", "RIGHT", "BACK"],
+		"forkliftPackingSides": ["FRONT", "LEFT", "RIGHT"]
+    }
+}

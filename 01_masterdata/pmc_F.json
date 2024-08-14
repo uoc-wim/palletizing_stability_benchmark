@@ -1,0 +1,115 @@
+{
+    "properties": {
+        "palletLabel": "PN 331 LH",
+        "contourLabel": "F_contour_96",
+        "iataCode": "PMC",
+        "description": "Pallet",
+        "standardWeight": 121,
+        "maxWeight": 6804,
+        "certified": true,
+        "extensionWidth": 0,
+        "extensionHeight": 0,
+        "extensionMaxWeight": 0,
+        "bottomArea": [
+            {
+                "x": 0,
+                "y": 0
+            },
+            {
+                "x": 318,
+                "y": 0
+            },
+            {
+                "x": 318,
+                "y": 244
+            },
+            {
+                "x": 0,
+                "y": 244
+            }
+        ],
+        "loadableBottomArea": [
+            {
+                "x": 7,
+                "y": 6
+            },
+            {
+                "x": 311,
+                "y": 6
+            },
+            {
+                "x": 311,
+                "y": 237
+            },
+            {
+                "x": 7,
+                "y": 237
+            }
+        ],
+        "contourVertices": [
+            {
+                "x": 0,
+                "y": 50,
+                "z": 0
+            },
+            {
+                "x": 0,
+                "y": 163,
+                "z": 0
+            },
+            {
+                "x": 406,
+                "y": 163,
+                "z": 0
+            },
+            {
+                "x": 406,
+                "y": 50,
+                "z": 0
+            },
+            {
+                "x": 362,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "x": 44,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "x": 0,
+                "y": 50,
+                "z": 244
+            },
+            {
+                "x": 0,
+                "y": 163,
+                "z": 244
+            },
+            {
+                "x": 406,
+                "y": 163,
+                "z": 244
+            },
+            {
+                "x": 406,
+                "y": 50,
+                "z": 244
+            },
+            {
+                "x": 362,
+                "y": 0,
+                "z": 244
+            },
+            {
+                "x": 44,
+                "y": 0,
+                "z": 244
+            }
+        ],
+        "uldType": "Pallet",
+		"generalPackingSides": ["FRONT", "LEFT", "RIGHT", "BACK"],
+		"forkliftPackingSides": ["FRONT", "LEFT", "RIGHT"]
+    }
+}
