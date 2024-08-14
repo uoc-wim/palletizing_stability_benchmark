@@ -1,0 +1,28 @@
+{
+  "itemLabel": "000-1073x0-1",
+  "priority": 2084.0,
+  "weight": 482.0,
+  "loadCapacity": 5094.223999999999,
+  "shape": {
+    "shapeType": "Box",
+    "width": 218.0,
+    "height": 113.0,
+    "depth": 254.0,
+    "rotationState": 2,
+    "id": 2025
+  },
+  "x": 4,
+  "y": 118,
+  "z": 96,
+  "sequence": 0,
+  "packingSequence": null,
+  "floorLoad": 0.0,
+  "forkliftCapableDirections": "XZ",
+  "shipmentLabel": "000-1073",
+  "centerOfMass": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "id": 2024
+}

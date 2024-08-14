@@ -1,0 +1,143 @@
+{
+    "properties": {
+        "label": "ake",
+        "iataCode": "AKE/AVE",
+        "description": "Container (LD3) [Aluminium]",
+        "standardWeight": 80,
+        "maxWeight": 1588,
+        "certified": true,
+        "maxLoadTiepoints": 907,
+        "maxHangingLoad": 0,
+        "maxIceCapacity": 0,
+        "maxLoadRoof": 0,
+        "dimensionsInside": [
+            {
+                "x": 52,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "x": 0,
+                "y": 45,
+                "z": 0
+            },
+            {
+                "x": 0,
+                "y": 158,
+                "z": 0
+            },
+            {
+                "x": 196,
+                "y": 158,
+                "z": 0
+            },
+            {
+                "x": 196,
+                "y": 0,
+                "z": 0
+            },
+            {
+                "x": 52,
+                "y": 0,
+                "z": 141
+            },
+            {
+                "x": 0,
+                "y": 45,
+                "z": 141
+            },
+            {
+                "x": 0,
+                "y": 158,
+                "z": 141
+            },
+            {
+                "x": 196,
+                "y": 158,
+                "z": 141
+            },
+            {
+                "x": 196,
+                "y": 0,
+                "z": 141
+            }
+        ],
+        "dimensionsOutside": [
+            {
+                "x": 43,
+                "y": -2,
+                "z": -6
+            },
+            {
+                "x": -2,
+                "y": 43,
+                "z": -6
+            },
+            {
+                "x": -2,
+                "y": 161,
+                "z": -6
+            },
+            {
+                "x": 199,
+                "y": 161,
+                "z": -6
+            },
+            {
+                "x": 199,
+                "y": -2,
+                "z": -6
+            },
+            {
+                "x": 43,
+                "y": -2,
+                "z": 147
+            },
+            {
+                "x": -2,
+                "y": 43,
+                "z": 147
+            },
+            {
+                "x": -2,
+                "y": 161,
+                "z": 147
+            },
+            {
+                "x": 199,
+                "y": 161,
+                "z": 147
+            },
+            {
+                "x": 199,
+                "y": -2,
+                "z": 147
+            }
+        ],
+        "doorDimensions": [
+            {
+                "x": 43,
+                "y": 10,
+                "z": 147
+            },
+            {
+                "x": 193,
+                "y": 10,
+                "z": 147
+            },
+            {
+                "x": 193,
+                "y": 151,
+                "z": 147
+            },
+            {
+                "x": 43,
+                "y": 151,
+                "z": 147
+            }
+        ],
+        "uldType": "Container",
+		"generalPackingSides": ["FRONT"],
+		"forkliftPackingSides": ["FRONT"]
+    }
+}
