@@ -6,11 +6,10 @@ FILES_PATTERN <<- "*.csv"
 
 DATASET_1 <- "Data_1/"
 DATASET_2 <- "Data_2/"
-DATASETS <- c(DATASET_1)
+DATASETS <- c(DATASET_1, DATASET_2)
 
 #Insert here the project root path. In R it is difficult to obtain the current file location
-#PATH_TO_ROOT <- "<Path_to_Project_Root>"
-PATH_TO_ROOT <- "/Users/philippmazur/IdeaProjects/palletizing_stability_benchmark"
+PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 APPROACHES_IN_FIGURES <- c("FBS", "PBS_0.8", "PBS_0.5", "SME", "PS_1", "PS_5")
 
@@ -23,7 +22,6 @@ updatePaths <- function() {
 
 #Obtain ADAMS Results
 getResults <- function() {
-  ############
   files <- list.files(pattern=FILES_PATTERN, full.names=FALSE, recursive=FALSE)
   
   results_df <- NULL

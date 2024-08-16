@@ -4,24 +4,21 @@ library(ggplot2)
 
 FILES_PATTERN <- "*.csv"
 
+DATASET_1 <- "Data_1/"
+DATASET_2 <- "Data_2/"
+DATASETS <- c(DATASET_1, DATASET_2)
+
 SCENARIO_1 <- "Ulds_scenario_1"
 SCENARIO_2a <- "Ulds_scenario_2a"
 SCENARIO_2b <- "Ulds_scenario_2b"
-#SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
-SCENARIOS <- c(SCENARIO_2b)
-
-
-DATASET_1 <- "Data_1/"
-DATASET_2 <- "Data_2/"
-DATASETS <- c(DATASET_1)
+SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
 DELTA_TRANSLATION_ROTATION_BASELINE <- c(5, 10, 15)
 
 APPROACHES_IN_FIGURES <- c("FBS", "PBS_0.8", "PBS_0.5", "SME", "PS_1", "PS_5")
 
 #Insert here the project root path. In R it is difficult to obtain the current file location
-#PATH_TO_ROOT <- "<Path_to_Project_Root>"
-PATH_TO_ROOT <- "/Users/philippmazur/IdeaProjects/palletizing_stability_benchmark"
+PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 
 #####################  Begin functions
@@ -29,8 +26,7 @@ PATH_TO_ROOT <- "/Users/philippmazur/IdeaProjects/palletizing_stability_benchmar
 updatePaths <- function(sensitivity_level) {
   PATH_TO_FOLDER <<- paste0(PATH_TO_ROOT, "/Data/")
   PATH_TO_DATASET <<- paste0(PATH_TO_FOLDER, CURRENT_DATASET)
-  PATH_TO_CRITERIA <<- paste0(PATH_TO_FOLDER, "AssesmentCriteria_R_output.json")
-  
+
   PATH_TO_AERESULTS <<- paste0(PATH_TO_DATASET,"3_AeResults/", CURRENT_SCENARIO)
   PATH_TO_AEJOBS <<- paste0(PATH_TO_DATASET,"2_AeJobs/", CURRENT_SCENARIO)
   PATH_SENSITVITY_RESULTS <<- PATH_TO_DATA <- paste0(PATH_TO_DATASET, "5_Final_results/sensitivity_analysis/", sensitivity_level)

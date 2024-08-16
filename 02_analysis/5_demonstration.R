@@ -7,8 +7,7 @@ library(stringr)
 FILES_PATTERN <- "*.json"
 
 #Insert here the project root path. In R it is difficult to obtain the current file location
-#PATH_TO_ROOT <- "<Path_to_Project_Root>"
-PATH_TO_ROOT <- "/Users/philippmazur/IdeaProjects/palletizing_stability_benchmark"
+PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 # insert here the job file name you want to demonstrate
 JOB_TO_DEMONSTRATE <- "Data/Data_1/4_Benchmark/Ulds_scenario_2b/done_raw/Data_1_Ulds_scenario_2b_LH8048-28NOV15-FRA-LAX_pmc_md11f_md-2.json.json"

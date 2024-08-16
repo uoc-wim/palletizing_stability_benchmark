@@ -1,22 +1,21 @@
 library(rjson)
 FILES_PATTERN <- "*.json"
 
+DATASET_1 <- "Data_1/"
+DATASET_3 <- "Data_2/"
+DATASETS <- c(DATASET_1, DATASET_2)
+
 SCENARIO_1 <- "Ulds_scenario_1"
 SCENARIO_2a <- "Ulds_scenario_2a"
 SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
-
-DATASET_1 <- "Data_1/"
-DATASET_2 <- "Data_2/"
-DATASETS <- c(DATASET_1)
 
 # insert here the minimal dimensions for item width, height, depth in cm
 MIN_ITEM_DIMENSIONS_WIDTH_AND_DEPTH <- 15
 MIN_ITEM_DIMENSIONS_HEIGHT <- 15
 
 #Insert here the project root path. In R it is difficult to obtain the current file location
-#PATH_TO_ROOT <- "<Path_to_Project_Root>"
-PATH_TO_ROOT <- "/Users/philippmazur/IdeaProjects/palletizing_stability_benchmark"
+PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 #####################  Begin functions
 
