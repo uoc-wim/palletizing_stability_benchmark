@@ -7,7 +7,7 @@ library(stringr)
 FILES_PATTERN <- "*.json"
 
 DATASET_1 <- "Data_1/"
-DATASET_3 <- "Data_2/"
+DATASET_2 <- "Data_2/"
 DATASETS <- c(DATASET_1, DATASET_2)
 
 SCENARIO_1 <- "Ulds_scenario_1"
