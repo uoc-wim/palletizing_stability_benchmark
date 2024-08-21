@@ -4,8 +4,9 @@ INTEGRATOR_TYPE="hht"
 
 # Simulation Settings
 END_TIME = 0.3
-NUM_THREADS = 12
-NUMBER_OF_STEPS = 15
+
+NUM_THREADS = 16
+NUMBER_OF_STEPS = 10
 
 # Path to the job files (jsons)
 PATH_TO_JSON = "./jobs/"
