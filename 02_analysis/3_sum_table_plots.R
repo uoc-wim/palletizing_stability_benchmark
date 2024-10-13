@@ -8,7 +8,7 @@ DATASET_1 <- "Data_1/"
 DATASET_2 <- "Data_2/"
 DATASETS <- c(DATASET_1, DATASET_2)
 
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 APPROACHES_IN_FIGURES <- c("FBS", "PBS_0.8", "PBS_0.5", "SME", "PS_1", "PS_5")
@@ -26,9 +26,7 @@ getResults <- function() {
   
   results_df <- NULL
   results_df <- data.frame()
-  
-  criteria <- makeCriteriaList()
-  
+
   for (file in files) {
     data <- read_csv2(file)
     data$Scenario <- file

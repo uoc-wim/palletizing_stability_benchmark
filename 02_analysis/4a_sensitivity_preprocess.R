@@ -15,9 +15,9 @@ SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
 # insert here the epsilon translation and rotation for the sensitivity anaylsis
-DELTA_TRANSLATION_ROTATION_BASELINE <- c(5, 10, 15)
+EPSILON_LEVELS_TRANSLATION_ROTATION <- c(5, 10, 15)
 
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 updatePaths <- function(sensitivity_level) {
@@ -96,7 +96,7 @@ startAll <- function() {
   for (dataset in DATASETS) {
     CURRENT_DATASET <<- dataset
     for (scenario in SCENARIOS) {
-      for(sensitivity_level in DELTA_TRANSLATION_ROTATION_BASELINE) {
+      for(sensitivity_level in EPSILON_LEVELS_TRANSLATION_ROTATION) {
         CURRENT_SCENARIO <<- scenario
         print(paste0("Evaluating Data [", CURRENT_DATASET, "] Scenario [", CURRENT_SCENARIO,"]"))
         updatePaths(sensitivity_level)

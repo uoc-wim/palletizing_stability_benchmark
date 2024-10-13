@@ -11,12 +11,13 @@ SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
 # insert here the minimal dimensions for item width, height, depth in cm
-MIN_ITEM_DIMENSIONS_WIDTH_AND_DEPTH <- 15
-MIN_ITEM_DIMENSIONS_HEIGHT <- 15
+MIN_ITEM_DIMENSIONS <- 10
 
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# min number of items per ULD
+MIN_NUM_ITEMS <- 2
+
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
-
 #####################  Begin functions
 
 updatePaths <- function() {
@@ -35,7 +36,7 @@ updatePaths <- function() {
 }
 
 # This function creates a large Dataframe out of the Benchmark values (scores, names)
-add_benchmark <- function() {
+addBenchmark <- function() {
   setwd(PATH_TO_BENCHMARK)
 
   files_benchmark <- list.files(pattern=FILES_PATTERN, full.names=FALSE, recursive=FALSE)
@@ -65,7 +66,7 @@ add_benchmark <- function() {
   return(results_df)
 }
 
-make_assessment_name  <- function(criterion) {
+makeAssessmentName  <- function(criterion) {
   if(startsWith(criterion$criterionType, "PartialBase")){
     return(paste0("PartialBaseSupportCriterion", criterion$alpha * 100))
   }
@@ -75,11 +76,11 @@ make_assessment_name  <- function(criterion) {
   return(criterion$criterionType)
 }
 
-create_results_df <- function(results) {
+createResultsDF <- function(results) {
   results_df <- NULL
   results_df <- data.frame(matrix(ncol = 5, nrow = 0))
   
-  benchmark_results <- add_benchmark()
+  benchmark_results <- addBenchmark()
   
   for(assessment in results) {
     solution <- assessment
@@ -87,27 +88,30 @@ create_results_df <- function(results) {
     
     row <- data.frame(assessment$name)
     for(assessmentCriterion in assessmentCriteria) {
-      assessment_name <- make_assessment_name(assessmentCriterion$criterion)
+      assessment_name <- makeAssessmentName(assessmentCriterion$criterion)
       row[paste0(assessment_name,"_score")] <- assessmentCriterion$score
       row[paste0(assessment_name,"_runtime")] <- assessmentCriterion$runtimeInMs
     }
     
     benchmark <- benchmark_results[benchmark_results$name == assessment$name,]$Benchmark
     
-    mins <- obtain_min_item_dimension(assessment$name)
+    mins <- obtainMinItemDimensions(assessment$name)
+    n_items <- obtain_n_items(assessment$name)
+    
     min_item_width_depth <- mins[1]
     min_item_height <- mins[2]
-
+    
     ## Apply filters ##
-    if(length(benchmark) == 0 | 
-       min_item_width_depth < MIN_ITEM_DIMENSIONS_WIDTH_AND_DEPTH |
-       min_item_height < MIN_ITEM_DIMENSIONS_HEIGHT ) { # Filter all rows, where we don't haven a Benchmark value 
+    if(length(benchmark) == 0 | # Filter all rows, where we don't haven a Benchmark value 
+       min_item_width_depth < MIN_ITEM_DIMENSIONS |
+       min_item_height < MIN_ITEM_DIMENSIONS |
+       n_items < MIN_NUM_ITEMS) { 
       next
     }
     ## End Apply filters ##
         
     row["Benchmark"] <- benchmark
-    row["n_items"] <- obtain_n_items(assessment$name)
+    row["n_items"] <- n_items
     
     results_df <- rbind(results_df, row)
   }
@@ -122,7 +126,7 @@ obtain_n_items <- function(file_name) {
   return(items)
 }
 
-obtain_min_item_dimension <- function(file_name) {
+obtainMinItemDimensions <- function(file_name) {
   job_file_path <- paste0(PATH_TO_AEJOBS, '/', file_name)
   json_data <- list(fromJSON(file = job_file_path))
   
@@ -152,17 +156,17 @@ obtain_min_item_dimension <- function(file_name) {
 }
 
 
-make_criteria_list <- function() {
+makeCriteriaList <- function() {
   criteriaList <- cbind()
   criteria <- list(fromJSON(file = PATH_TO_CRITERIA))[[1]]$assessmentCriteria
   for(criterion in criteria) {
-    criteria_name <- make_assessment_name(criterion)
+    criteria_name <- makeAssessmentName(criterion)
     criteriaList <- rbind(criteriaList, criteria_name)
   }
   return(criteriaList)
 }
 
-calculate_approach_classification <- function(results_df, approach) {
+calculateApproachClassification <- function(results_df, approach) {
 
   score <- paste0(approach, "_score")
   runtime <- paste0(approach, "_runtime")
@@ -192,7 +196,7 @@ calculate_approach_classification <- function(results_df, approach) {
 summarizeResults <- function(results_df, criteriaList) {
   final_results <- data.frame()
   for(criterion in criteriaList) {
-    final_results <- rbind(final_results, calculate_approach_classification(results_df, criterion))
+    final_results <- rbind(final_results, calculateApproachClassification(results_df, criterion))
   }
   return(final_results)
 }
@@ -200,7 +204,7 @@ summarizeResults <- function(results_df, criteriaList) {
 #####################  Begin Script
 
 startSingle <- function() {
-  criteriaList <- make_criteria_list()
+  criteriaList <- makeCriteriaList()
   
   setwd(PATH_TO_DATASET)
   
@@ -222,7 +226,7 @@ startSingle <- function() {
     results <- append(results, data)
   }
   print(paste0("Evaluating ", length(files_aeresults), " files in AeResults"))
-  results_df <- create_results_df(results)
+  results_df <- createResultsDF(results)
   final_results <- summarizeResults(results_df, criteriaList = criteriaList)
   
   write.csv2(final_results, paste0(PATH_OUTPUT, "final_results_",CURRENT_SCENARIO,".csv"))

@@ -13,11 +13,12 @@ SCENARIO_2a <- "Ulds_scenario_2a"
 SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
-DELTA_TRANSLATION_ROTATION_BASELINE <- c(5, 10, 15)
+# levels of epsilons to include in the sensitivity analysis
+EPSILON_LEVELS_TRANSLATION_ROTATION <- c(5, 10, 15)
 
 APPROACHES_IN_FIGURES <- c("FBS", "PBS_0.8", "PBS_0.5", "SME", "PS_1", "PS_5")
 
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 
@@ -82,7 +83,7 @@ makePlot <- function(output, dataset, scenario) {
   custom_colors <- c("Accuracy" = "#2ca02c", "UE" = "#1f77b4", "OE" = "#ff7f0e")
   final_data$Data <- as.numeric(final_data$Data) * 100
   final_data$Category <- factor(final_data$Category, levels = c("Accuracy", "UE", "OE")) # The order is FROM THE TOP!!!
-  final_data$Sensitivity_Level <- factor(final_data$Sensitivity_Level, levels = DELTA_TRANSLATION_ROTATION_BASELINE)
+  final_data$Sensitivity_Level <- factor(final_data$Sensitivity_Level, levels = EPSILON_LEVELS_TRANSLATION_ROTATION)
   final_data$Approach_Original <- factor(final_data$Approach_Original, levels = APPROACHES_IN_FIGURES)
 
   plot <- ggplot(final_data, aes(x=Sensitivity_Level, y=Data, fill = Category), width = 0.3) +
@@ -136,7 +137,7 @@ startAll <- function() {
       
       output <- data.frame()
       
-      for(sensitivity_level in DELTA_TRANSLATION_ROTATION_BASELINE) {
+      for(sensitivity_level in EPSILON_LEVELS_TRANSLATION_ROTATION) {
         updatePaths(sensitivity_level)
         output <- rbind(output, getResults(sensitivity_level, scenario))
       }

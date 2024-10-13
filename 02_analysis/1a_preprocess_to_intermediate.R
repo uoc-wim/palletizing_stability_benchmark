@@ -15,27 +15,26 @@ SCENARIO_2a <- "Ulds_scenario_2a"
 SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
+
+# the location of the raw results from the ADAMS benchmark simulations
+PATH_TO_BENCHMARK_RAW <- "<Path_to_Benchark_Raw>"
+
+RESULTS <- c()
 
 updatePaths <- function() {
   PATH_TO_FOLDER <<- paste0(PATH_TO_ROOT, "/Data/")
   
   PATH_TO_DATASET <<-  paste0(PATH_TO_FOLDER, CURRENT_DATASET)
-  PATH_TO_GT <<-  paste0(PATH_TO_DATASET, "/4_Benchmark/", CURRENT_SCENARIO)
-  APPENDIX_INPUT <<-  "/done_raw/"
-  APPENDIX_OUTPUT_INTERMEDIATE <<-  "/done_intermediate/"
-  APPENDIX_OUTPUT <<-  "/done/"
+  PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY <<- paste0(PATH_TO_DATASET, "/4_Benchmark/", CURRENT_SCENARIO, "/done_intermediate/")
   
-  
-  PATH_TO_DIRECTORY_INPUT <<-  paste0(PATH_TO_GT, APPENDIX_INPUT)
-  PATH_TO_OUTPUT_DIRECTORY <<-  paste0(PATH_TO_GT, APPENDIX_OUTPUT)
-  PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY <<- paste0(PATH_TO_GT, APPENDIX_OUTPUT_INTERMEDIATE)
+  PATH_TO_BENCHMARK_DATSET <<-  paste0(PATH_TO_BENCHMARK_RAW, CURRENT_DATASET)
+  PATH_TO_DIRECTORY_INPUT <<-  paste0(PATH_TO_BENCHMARK_DATSET, "/4_Benchmark/", CURRENT_SCENARIO, "/done_raw/")
   
   setwd(PATH_TO_DIRECTORY_INPUT)
-  unlink(paste0(PATH_TO_OUTPUT_DIRECTORY, "*"))
   dir.create(PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY, showWarnings = FALSE)
-  dir.create(PATH_TO_OUTPUT_DIRECTORY, showWarnings = FALSE)
+  RESULTS <<- list.files(PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY, pattern=FILES_PATTERN, recursive=TRUE)
 }
 
 AUC <- function(x, y){
@@ -48,7 +47,9 @@ getIntermediateResults <- function() {
   i <- 0
   
   for (file in files) {
-    setwd(PATH_TO_DIRECTORY_INPUT)
+    if(file %in% RESULTS) { # Already in results, skip
+      next
+    }
     #read json
     json <- list(fromJSON(file = file))[[1]]
     
@@ -109,9 +110,8 @@ getIntermediateResults <- function() {
 euclidean <- function(a, b, c) sqrt(sum((a^2 + b^2 + c^2)))
 
 writeIntermediateOutput <- function(intermediate_results, fileName) {
-  setwd(PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY)
   outputFormat <- toJSON(intermediate_results)
-  write(outputFormat, fileName)
+  write(outputFormat, paste0(PATH_TO_INTERMEDIATE_OUTPUT_DIRECTORY, '/', fileName))
 }
 
 startIntermediate <- function() {

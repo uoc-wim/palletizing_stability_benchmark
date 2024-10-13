@@ -13,11 +13,11 @@ SCENARIO_2a <- "Ulds_scenario_2a"
 SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
-# Insert here the maximum thresholds for translation (max) in x-, y-, and z-axes and the rotation (max) in either direction
+# insert here the maximum thresholds for translation (max) in x-, y-, and z-axes and the rotation (max) in either direction
 EPSILON_TRANSLATION <- 10
 EPSILON_ROTATION <- 10
 
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 updatePaths <- function() {
@@ -94,7 +94,7 @@ startAll <- function() {
     CURRENT_DATASET <<- dataset
     for (scenario in SCENARIOS) {
       CURRENT_SCENARIO <<- scenario
-      print(paste0("Evaluating Data [", CURRENT_DATASET, "] Scenario [", CURRENT_SCENARIO,"]"))
+      print(paste0("Evaluating [", CURRENT_DATASET, "], [", CURRENT_SCENARIO,"]"))
       updatePaths()
       readResults()
     }

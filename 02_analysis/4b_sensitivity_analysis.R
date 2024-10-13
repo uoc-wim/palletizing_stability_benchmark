@@ -11,14 +11,16 @@ SCENARIO_2b <- "Ulds_scenario_2b"
 SCENARIOS <- c(SCENARIO_1, SCENARIO_2a, SCENARIO_2b)
 
 # insert here the minimal dimensions for item width, height, depth in cm
-MIN_ITEM_DIMENSIONS_WIDTH_DEPTH <- 15
-MIN_ITEM_DIMENSIONS_HEIGHT <- 15
+MIN_ITEM_DIMENSIONS <- 10
 
-EPSILON_TRANSLATION_ROTATION_BASELINE <- c(5, 10, 15)
+# min number of items on the ULD
+MIN_NUM_ITEMS <- 2
+
+# levels of epsilons to include in the sensitivity analysis
+EPSILON_LEVELS_TRANSLATION_ROTATION <- c(5, 10, 15)
 
 
-
-#Insert here the project root path. In R it is difficult to obtain the current file location
+# insert here the project root path. In R it is difficult to obtain the current file location
 PATH_TO_ROOT <- "<Path_to_Project_Root>"
 
 
@@ -104,6 +106,8 @@ createResultsDf <- function(results) {
     ground_truth <- benchmark_results[benchmark_results$name == assessment$name,]$ADAMS
     
     mins <- obtainMinItemDimension(assessment$name)
+    n_items <- obtainN(assessment$name)
+    
     min_item_width_depth <- mins[1]
     min_item_height <- mins[2]
     
@@ -111,16 +115,19 @@ createResultsDf <- function(results) {
     if(length(ground_truth)==0) { # Filter all rows, where we dont haven an ADAMS GT value 
       next
     }
-    if(min_item_width_depth < MIN_ITEM_DIMENSIONS_WIDTH_DEPTH) {
+    if(min_item_width_depth < MIN_ITEM_DIMENSIONS) {
       next
     }
-    if(min_item_height < MIN_ITEM_DIMENSIONS_HEIGHT) {
+    if(min_item_height < MIN_ITEM_DIMENSIONS) {
+      next
+    }
+    if(n_items < MIN_NUM_ITEMS) {
       next
     }
     ## End Apply filters ##
     
     row["Benchmark"] <- ground_truth
-    row["n_items"] <- obtainN(assessment$name)
+    row["n_items"] <- n_items
     
     results_df <- rbind(results_df, row)
   }
@@ -243,7 +250,7 @@ startAll <- function() {
   for (dataset in DATASETS) {
     CURRENT_DATASET <<- dataset
     for (scenario in SCENARIOS) {
-      for(sensitivity_level in EPSILON_TRANSLATION_ROTATION_BASELINE) {
+      for(sensitivity_level in EPSILON_LEVELS_TRANSLATION_ROTATION) {
         CURRENT_SCENARIO <<- scenario
         print(paste0("Evaluating ", CURRENT_DATASET, " ", CURRENT_SCENARIO))
         updatePaths(sensitivity_level)
